@@ -148,5 +148,5 @@ def _send_button_qiscus(email, name, room_id):
         
 
                   
-if __name__ == "__main__":
-    app.run()
+#if __name__ == "__main__":
+    #app.run()
