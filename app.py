@@ -74,7 +74,7 @@ def post():
     return req_json
 
 @app.route('/startonlinemeeting', methods=['POST']) #allow both GET and POST requests
-def post1():
+def startonlinemeeting():
     req_json = request.get_json()
     if req_json['payload']:
         pl = req_json['payload']
