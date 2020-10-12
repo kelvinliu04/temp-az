@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import requests
 import msal
 import app_config
+import threading
 
 app = Flask(__name__)
 
@@ -79,40 +80,11 @@ def post1():
         pl = req_json['payload']
         email = pl['from']['email']
         name = pl['from']['name']
+        
         room_id = pl['room']['id']
-        json = {
-            	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
-            	"message": "Hi good morning"+str(email),
-            	"type": "buttons",
-            	"room_id": room_id,
-            	"payload": {
-            		"text": "silahkan pencet",
-            	    "buttons": [
-            	        {
-            	            "label": "button1",
-            	            "type": "postback",
-            	            "payload": {
-            	                "url": "https://qiscus-online-meeting.azurewebsites.net/",
-            	                "method": "get",
-            	                "payload": None
-            	            }
-            	        },
-            	        {
-            	            "label": "button2",
-            	            "type": "link",
-            	            "payload": {
-            	                "url": "https://qiscus-online-meeting.azurewebsites.net/login"
-            	            }
-            	        }
-            		]
-            	}
-            }
-        base_url = "https://multichannel.qiscus.com/"
-        app_code = 'tyes-razurkhhoyewouxd'
-        url = base_url + app_code + "/bot"
-        headers = {'Content-Type': 'application/json'}
-        result = requests.post(url, headers=headers, json=json)
-        #data = req_json["data"]
+        
+        threading1 = threading.Thread(target=_send_button_qiscus, args=(email, name, room_id, ))
+        threading1.start()
     return req_json
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +110,40 @@ def _save_cache(cache):
         session["token_cache"] = cache.serialize()
         
         
-        
+def _send_button_qiscus(email, name, room_id):
+    json = {
+        	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
+        	"message": "Hi good morning"+str(email),
+        	"type": "buttons",
+        	"room_id": room_id,
+        	"payload": {
+        		"text": "silahkan pencet",
+        	    "buttons": [
+        	        {
+        	            "label": "button1",
+        	            "type": "postback",
+        	            "payload": {
+        	                "url": "https://qiscus-online-meeting.azurewebsites.net/",
+        	                "method": "get",
+        	                "payload": None
+        	            }
+        	        },
+        	        {
+        	            "label": "button2",
+        	            "type": "link",
+        	            "payload": {
+        	                "url": "https://qiscus-online-meeting.azurewebsites.net/login"
+        	            }
+        	        }
+        		]
+        	}
+        }
+    base_url = "https://multichannel.qiscus.com/"
+    app_code = 'tyes-razurkhhoyewouxd'
+    url = base_url + app_code + "/bot"
+    headers = {'Content-Type': 'application/json'}
+    result = requests.post(url, headers=headers, json=json)
+    
         
         
 
