@@ -72,6 +72,48 @@ def post1():
     #data = req_json["data"]
     return req_json
 
+@app.route('/startonlinemeeting', methods=['POST']) #allow both GET and POST requests
+def post1():
+    req_json = request.get_json()
+    if req_json['payload']:
+        pl = req_json['payload']
+        email = pl['from']['email']
+        name = pl['from']['name']
+        room_id = pl['room']['id']
+        json = {
+            	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
+            	"message": "Hi good morning"+str(email),
+            	"type": "buttons",
+            	"room_id": room_id,
+            	"payload": {
+            		"text": "silahkan pencet",
+            	    "buttons": [
+            	        {
+            	            "label": "button1",
+            	            "type": "postback",
+            	            "payload": {
+            	                "url": "https://qiscus-online-meeting.azurewebsites.net/",
+            	                "method": "get",
+            	                "payload": None
+            	            }
+            	        },
+            	        {
+            	            "label": "button2",
+            	            "type": "link",
+            	            "payload": {
+            	                "url": "https://qiscus-online-meeting.azurewebsites.net/login"
+            	            }
+            	        }
+            		]
+            	}
+            }
+        base_url = "https://multichannel.qiscus.com/"
+        app_code = 'tyes-razurkhhoyewouxd'
+        url = base_url + app_code + "/bot"
+        headers = {'Content-Type': 'application/json'}
+        result = requests.post(url, headers=headers, json=json)
+        #data = req_json["data"]
+    return req_json
 
 #----------------------------------------------------------------------------------------------------------------------------------
 def _convert_dt_string(datetime):
