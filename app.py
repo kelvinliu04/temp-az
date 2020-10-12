@@ -68,7 +68,7 @@ def form_example():
     
 
 @app.route('/post', methods=['POST']) #allow both GET and POST requests
-def post1():
+def post():
     req_json = request.get_json()
     #data = req_json["data"]
     return req_json
@@ -148,5 +148,5 @@ def _send_button_qiscus(email, name, room_id):
         
 
                   
-#if __name__ == "__main__":
-    #app.run()
+if __name__ == "__main__":
+    app.run()
