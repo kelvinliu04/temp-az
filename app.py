@@ -1,7 +1,7 @@
 import uuid
-from flask import Flask, session, redirect, url_for
+from flask import Flask, session, redirect, url_for, request
 from flask_session import Session
-
+import json
 from datetime import datetime, timedelta
 import requests
 import msal
@@ -46,11 +46,34 @@ def onlinemeeting():
                     }
                 }
             }
-        
         ).json()
     return graph_data
 
+@app.route('/test', methods=['POST']) #allow both GET and POST requests
+def form_example():
+    if request.method == 'POST':  #this block is only entered when the form is submitted
+        req_json = request.get_json()
+        #req_json = json.loads(request.data, strict=False)
+        data1 = req_json["data1"]
+        data2 = req_json["data2"]
+        #data1 = req_json.get("data1")
+        #data2 = req_json.get("data2")
 
+        #return 'post {} {} '.format(data1, data2)
+        #return json.loads({'contents': data2, 'appname':data1})
+        return {"result":"ok"}
+    else:
+        return 'get'
+    
+
+@app.route('/post', methods=['POST']) #allow both GET and POST requests
+def post1():
+    req_json = request.get_json()
+    #data = req_json["data"]
+    return req_json
+
+
+#----------------------------------------------------------------------------------------------------------------------------------
 def _convert_dt_string(datetime):
     return datetime.strftime("%Y-%m-%dT%H:%M:%S-07:00")
 
@@ -71,3 +94,12 @@ def _load_cache():
 def _save_cache(cache):
     if cache.has_state_changed:
         session["token_cache"] = cache.serialize()
+        
+        
+        
+        
+        
+
+                  
+#if __name__ == "__main__":
+    #app.run()
