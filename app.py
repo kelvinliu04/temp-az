@@ -111,6 +111,7 @@ def _save_cache(cache):
         
         
 def _send_button_qiscus(email, name, room_id):
+    teams_url = _teams_start()
     json = {
         	"sender_email": "{}".format(email), 
         	"message": "Hi good morning",
@@ -132,7 +133,7 @@ def _send_button_qiscus(email, name, room_id):
         	            "label": "button2",
         	            "type": "link",
         	            "payload": {
-        	                "url": "https://qiscus-online-meeting.azurewebsites.net/login"
+        	                "url": "{}".format(teams_url)
         	            }
         	        }
         		]
@@ -145,7 +146,37 @@ def _send_button_qiscus(email, name, room_id):
     result = requests.post(url, headers=headers, json=json)
     
         
+    
+def _teams_start():
+    token = _get_token_from_pw()
+    if not token:
+        return redirect(url_for("login"))
+    
+    duration = 10 # in minutes
+    startDT = datetime.utcnow() - timedelta(hours=7)
+    endDT = startDT + timedelta(minutes=duration)
+
+    graph_data = requests.post(  
+        "https://graph.microsoft.com/v1.0/me/onlineMeetings",
+        headers={'Authorization': 'Bearer ' + token['access_token'],
+                 'Content-type':'application/json'},
         
+        json ={
+            #"autoAdmittedUsers":"everyone",
+            "startDateTime":_convert_dt_string(startDT),
+            "endDateTime":_convert_dt_string(endDT),
+            "participants": {
+                "organizer": {
+                    "identity": {
+                        "user": {
+                            "id": "9dad4a29-78bf-4ad5-8e65-7be53fb88933"
+                            }
+                        }
+                    }
+                }
+            }
+        ).json()
+    return graph_data['joinWebUrl']
 
                   
 #if __name__ == "__main__":
