@@ -112,12 +112,12 @@ def _save_cache(cache):
         
 def _send_button_qiscus(email, name, room_id):
     json = {
-        	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
+        	"sender_email": "{}".format(email), 
         	"message": "Hi good morning",
         	"type": "buttons",
-        	"room_id": "27506094",
+        	"room_id": "{}".format(room_id),
         	"payload": {
-        		"text": "silahkan pencet{}".format(room_id),
+        		"text": "silahkan pencet".format(email),
         	    "buttons": [
         	        {
         	            "label": "button1",
