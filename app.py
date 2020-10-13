@@ -114,31 +114,22 @@ def _send_button_qiscus(email, name, room_id):
     teams_url = _teams_start()
     #teams_url = "https://qiscus-online-meeting.azurewebsites.net/login"
     json = {
-        	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
+        	"sender_email": "gume-br1lmyldfzyvrw2j_admin@qismo.com", 
         	"message": "Hi good morning",
         	"type": "buttons",
         	"room_id": str(room_id),
         	"payload": {
         		"text": "silahkan pencet".format(email),
         	    "buttons": [
-        	        {
-        	            "label": "button1",
-        	            "type": "postback",
-        	            "payload": {
-        	                "url": "https://qiscus-online-meeting.azurewebsites.net/",
-        	                "method": "get",
-        	                "payload": None
-        	            }
-        	        },
-        	        {
-        	            "label": "button2",
+            	        {
+        	            "label": "Join Teams",
         	            "type": "link",
         	            "payload": {
         	                "url": "{}".format(teams_url)
         	            }
         	        }
         		]
-        	}
+        	} 
         }
     base_url = "https://multichannel.qiscus.com/"
     app_code = 'tyes-razurkhhoyewouxd'
