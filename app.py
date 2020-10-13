@@ -76,12 +76,12 @@ def post():
 @app.route('/startonlinemeeting', methods=['POST']) #allow both GET and POST requests
 def startonlinemeeting():
     req_json = request.get_json()
-    if req_json['payload']:
-        pl = req_json['payload']
-        email = pl['from']['email']
-        name = pl['from']['name']
+    if req_json['agent']:
+        agent = req_json['agent']
+        email = agent['email']
+        name = agent['name']
         
-        room_id = pl['room']['id']
+        room_id = req_json['room_id']
         
         threading1 = threading.Thread(target=_send_button_qiscus, args=(email, name, room_id, ))
         threading1.start()
