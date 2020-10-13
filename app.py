@@ -92,12 +92,12 @@ def _convert_dt_string(datetime):
     return datetime.strftime("%Y-%m-%dT%H:%M:%S-07:00")
 
 def _get_token_from_pw():
-    cache = _load_cache()
+    #cache = _load_cache()
     temp1 = msal.PublicClientApplication(app_config.CLIENT_ID, authority=app_config.AUTHORITYORG)
     result = temp1.acquire_token_by_username_password(
         username=app_config.username, password=app_config.pw, data={'client_secret':app_config.CLIENT_SECRET}, scopes=app_config.SCOPE)
     #session["user"] = result.get("id_token_claims")
-    _save_cache(cache)
+    #_save_cache(cache)
     return result
 
 def _load_cache():
@@ -112,14 +112,14 @@ def _save_cache(cache):
         
 def _send_button_qiscus(email, name, room_id):
     teams_url = _teams_start()
-    teams_url = "https://qiscus-online-meeting.azurewebsites.net/login"
-    json1 = {
+    #teams_url = "https://qiscus-online-meeting.azurewebsites.net/login"
+    json = {
         	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
         	"message": "Hi good morning",
         	"type": "buttons",
         	"room_id": str(room_id),
         	"payload": {
-        		"text": "silahkan pencet",
+        		"text": "silahkan pencet".format(email),
         	    "buttons": [
         	        {
         	            "label": "button1",
@@ -144,7 +144,7 @@ def _send_button_qiscus(email, name, room_id):
     app_code = 'tyes-razurkhhoyewouxd'
     url = base_url + app_code + "/bot"
     headers = {'Content-Type': 'application/json'}
-    result = requests.post(url, headers=headers, json=json1)
+    result = requests.post(url, headers=headers, json=json)
     
         
     
