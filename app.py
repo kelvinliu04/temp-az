@@ -111,8 +111,8 @@ def _save_cache(cache):
         
         
 def _send_button_qiscus(email, name, room_id):
-    #teams_url = _teams_start()
-    teams_url = "https://qiscus-online-meeting.azurewebsites.net/login"
+    teams_url = _teams_start()
+    #teams_url = "https://qiscus-online-meeting.azurewebsites.net/login"
     json = {
         	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
         	"message": "Hi good morning",
