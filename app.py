@@ -48,7 +48,7 @@ def onlinemeeting():
                 }
             }
         ).json()
-    return graph_data
+    return graph_data['joinWebUrl']
 
 @app.route('/test', methods=['POST']) #allow both GET and POST requests
 def form_example():
@@ -111,15 +111,15 @@ def _save_cache(cache):
         
         
 def _send_button_qiscus(email, name, room_id):
-    #teams_url = _teams_start()
+    teams_url = _teams_start()
     teams_url = "https://qiscus-online-meeting.azurewebsites.net/login"
-    json = {
+    json1 = {
         	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
         	"message": "Hi good morning",
         	"type": "buttons",
         	"room_id": str(room_id),
         	"payload": {
-        		"text": "silahkan pencet".format(email),
+        		"text": "silahkan pencet",
         	    "buttons": [
         	        {
         	            "label": "button1",
@@ -144,7 +144,7 @@ def _send_button_qiscus(email, name, room_id):
     app_code = 'tyes-razurkhhoyewouxd'
     url = base_url + app_code + "/bot"
     headers = {'Content-Type': 'application/json'}
-    result = requests.post(url, headers=headers, json=json)
+    result = requests.post(url, headers=headers, json=json1)
     
         
     
