@@ -125,7 +125,7 @@ def _teams_start():
                 }
             }
         ).json()
-    return graph_data
+    return graph_data['joinWebUrl']
 
 def _teams_event():
     token = _get_token_from_pw()
