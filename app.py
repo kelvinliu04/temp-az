@@ -89,7 +89,8 @@ def _send_button_qiscus(email, name, room_id):
         	} 
         }
     base_url = "https://multichannel.qiscus.com/"
-    app_code = 'gume-br1lmyldfzyvrw2j'
+    #app_code = 'gume-br1lmyldfzyvrw2j'
+    app_code = 'tyes-razurkhhoyewouxd'
     url = base_url + app_code + "/bot"
     headers = {'Content-Type': 'application/json'}
     result = requests.post(url, headers=headers, json=json)
