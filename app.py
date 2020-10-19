@@ -71,7 +71,7 @@ def _send_button_qiscus(email, name, room_id):
     teams_url = _teams_start()
 
     json = {
-        	"sender_email": "gume-br1lmyldfzyvrw2j_admin@qismo.com", 
+        	"sender_email": "tyes-razurkhhoyewouxd_admin@qismo.com", 
         	"message": "Hi good morning",
         	"type": "buttons",
         	"room_id": str(room_id),
@@ -89,7 +89,7 @@ def _send_button_qiscus(email, name, room_id):
         	} 
         }
     base_url = "https://multichannel.qiscus.com/"
-    #app_code = 'gume-br1lmyldfzyvrw2j'
+    #app_code = 'gume-br1lmyldfzyvrw2j' "sender_email": "gume-br1lmyldfzyvrw2j_admin@qismo.com", 
     app_code = 'tyes-razurkhhoyewouxd'
     url = base_url + app_code + "/bot"
     headers = {'Content-Type': 'application/json'}
