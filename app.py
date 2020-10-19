@@ -106,7 +106,7 @@ def _teams_start():
     endDT = startDT + timedelta(minutes=duration)
 
     graph_data = requests.post(  
-        "https://graph.microsoft.com/v1.0/38a590da-aaa3-45e7-9e28-c2019c983894/onlineMeetings",
+        "https://graph.microsoft.com/v1.0/me/onlineMeetings",
         headers={'Authorization': 'Bearer ' + token['access_token'],
                  'Content-type':'application/json'},
         
